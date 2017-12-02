@@ -5,9 +5,9 @@ Course Exercise Group: 05
 Exercise name: Ex3
 ******************************************/
 #include <gtest/gtest.h>
-#include "../src/GameLogic.h"
-#include "../src/StandartGameLogic.h"
-#include "../src/HumanPlayer.h"
+#include "../src/client/GameLogic.h"
+#include "../src/client/StandartGameLogic.h"
+#include "../src/client/HumanPlayer.h"
 
 
 TEST(GameLogicTest, PossibleMovesCheck) {
