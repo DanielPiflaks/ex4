@@ -17,12 +17,9 @@ public:
      * @param board board to play on.
      * @param gameLogic game logic to play by.
      */
-    RemotePlayer(char symbol, Board *board1, GameLogic *gameLogic, int port, const char *IP) :
+    RemotePlayer(char symbol, Board *board1, GameLogic *gameLogic, Client *client) :
             Player(symbol, board, gameLogic) {
-        serverPort = port;
-        serverIP = IP;
-        client = new Client(serverIP, serverPort);
-        client->connectToServer();
+        this->client = client;
     };
 
 
@@ -38,8 +35,6 @@ public:
 
 private:
     Client *client;
-    int serverPort;
-    const char *serverIP;
 };
 
 

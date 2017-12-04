@@ -12,7 +12,7 @@
 Client::Client(const char *serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
 
-void Client::connectToServer() {
+int Client::connectToServer() {
     //Create socket point.
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -32,6 +32,13 @@ void Client::connectToServer() {
         throw "Error connecting to server";
     }
     cout << "Connected to server" << endl;
+
+    int numberOfPlayer;
+    int readParam = read(clientSocket, &numberOfPlayer, sizeof(numberOfPlayer));
+    if (readParam == -1){
+        throw "Error reading result from socket";
+    }
+    return numberOfPlayer;
 }
 
 int Client::sendMove(int row, int col) {
@@ -45,3 +52,5 @@ int Client::sendMove(int row, int col) {
         throw "Error writing column coordinate";
     }
 }
+
+

@@ -30,6 +30,24 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
         }
     }
 
+    Client *client;
+    if ((player1Type == RemotePlayerOp) || (player2Type == RemotePlayerOp)){
+        client = new Client(IP, PORT);
+        int remotePlayerNumber = client->connectToServer();
+        if (remotePlayerNumber == 1){
+            if (player1Type != RemotePlayerOp){
+                player2Type = player1Type;
+                player1Type = RemotePlayerOp;
+            }
+        }
+        if (remotePlayerNumber == 2){
+            if (player2Type != RemotePlayerOp){
+                player1Type = player2Type;
+                player2Type = RemotePlayerOp;
+            }
+        }
+    }
+
     //Create 2 simulator in case that one of players is computer.
     MiniMaxSimulator *simulatorPlayer1 = new MiniMaxSimulator(gameLogic);
     MiniMaxSimulator *simulatorPlayer2 = new MiniMaxSimulator(gameLogic);
@@ -45,7 +63,7 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
             break;
         }
         case RemotePlayerOp: {
-            player1 = new RemotePlayer(player1Symbol, gameBoard, gameLogic, PORT, IP);
+            player1 = new RemotePlayer(player1Symbol, gameBoard, gameLogic, client);
             break;
         }
         default:
@@ -62,7 +80,7 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
             break;
         }
         case RemotePlayerOp: {
-            player2 = new RemotePlayer(player2Symbol, gameBoard, gameLogic, PORT, IP);
+            player2 = new RemotePlayer(player2Symbol, gameBoard, gameLogic, client);
             break;
         }
         default:

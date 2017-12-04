@@ -12,9 +12,11 @@ class Client {
 public:
     Client(const char *serverIP, int serverPort);
 
-    void connectToServer();
+    int connectToServer();
 
     int sendMove(int row, int col);
+
+
 
 private:
     const char *serverIP;
