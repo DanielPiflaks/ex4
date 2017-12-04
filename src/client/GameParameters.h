@@ -12,8 +12,11 @@ Exercise name: Ex3
 #include "Player.h"
 #include "GameLogic.h"
 
+#define PORT 5555
+
 class GameParameters {
 public:
+    const char* IP = "10.0.0.4";
     /**
      * Enum of player options type.
      */

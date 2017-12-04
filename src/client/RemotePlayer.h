@@ -7,6 +7,7 @@
 
 
 #include "Player.h"
+#include "Client.h"
 
 class RemotePlayer : public Player {
 public:
@@ -16,7 +17,13 @@ public:
      * @param board board to play on.
      * @param gameLogic game logic to play by.
      */
-    RemotePlayer(char symbol, Board *board, GameLogic *gameLogic) : Player(symbol, board, gameLogic) {};
+    RemotePlayer(char symbol, Board *board1, GameLogic *gameLogic, int port, const char *IP) :
+            Player(symbol, board, gameLogic) {
+        serverPort = port;
+        serverIP = IP;
+        client = new Client(serverIP, serverPort);
+        client->connectToServer();
+    };
 
 
     /**
@@ -24,6 +31,15 @@ public:
      * @return vector of board coordinates that has been flipped
      */
     virtual vector<BoardCoordinates> playOneTurn();
+
+    BoardCoordinates getPlayerChoice(vector<BoardCoordinates> possibleMoves);
+
+    void printPossibleMoves(vector<BoardCoordinates> possibleMoves);
+
+private:
+    Client *client;
+    int serverPort;
+    const char *serverIP;
 };
 
 

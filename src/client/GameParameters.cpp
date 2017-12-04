@@ -44,8 +44,8 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
             player1 = new AIPlayer(player1Symbol, gameBoard, gameLogic, simulatorPlayer1);
             break;
         }
-        case RemotePlayerOp:{
-            player1 = new RemotePlayer(player1Symbol, gameBoard, gameLogic);
+        case RemotePlayerOp: {
+            player1 = new RemotePlayer(player1Symbol, gameBoard, gameLogic, PORT, IP);
             break;
         }
         default:
@@ -61,8 +61,8 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
             player2 = new AIPlayer(player2Symbol, gameBoard, gameLogic, simulatorPlayer2);
             break;
         }
-        case RemotePlayerOp:{
-            player2 = new RemotePlayer(player2Symbol, gameBoard, gameLogic);
+        case RemotePlayerOp: {
+            player2 = new RemotePlayer(player2Symbol, gameBoard, gameLogic, PORT, IP);
             break;
         }
         default:

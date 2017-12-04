@@ -7,6 +7,7 @@ Exercise name: Ex3
 #include <limits>
 #include "GameParameters.h"
 #include "Game.h"
+#include "Client.h"
 
 int main() {
     const int numberRows = 8;
@@ -29,7 +30,7 @@ int main() {
             //If input is 2, then the game is against AI player.
             player2Type = GameParameters::AIPlayerOp;
             waitingForInput = false;
-        } else if(input==3) {
+        } else if (input == 3) {
             //If input is 3, then the game is against remote player.
             player2Type = GameParameters::RemotePlayerOp;
             waitingForInput = false;
