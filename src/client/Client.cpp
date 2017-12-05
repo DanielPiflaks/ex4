@@ -46,7 +46,7 @@ void Client::sendMove(BoardCoordinates move) {
     char moveMessage[7];
 
     if ((move.getRow() == 0) && (move.getColumn())) {
-        moveMessage = "NoMove";
+        strcpy(moveMessage, "NoMove");
     } else {
         moveMessage[0] = move.getRow();
         moveMessage[1] = ',';
@@ -61,7 +61,7 @@ void Client::sendMove(BoardCoordinates move) {
     }
 }
 
-BoardCoordinates receiveMove() {
+BoardCoordinates Client::receiveMove() {
     char moveMessage[7];
     int readParam = read(clientSocket, &moveMessage, sizeof(moveMessage));
     if (readParam == -1) {
