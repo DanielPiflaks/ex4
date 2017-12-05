@@ -6,10 +6,13 @@
 #define EX4_HUMANPLAYERSENDER_H
 
 
-class HumanPlayerSender : HumanPlayer {
+#include "HumanPlayer.h"
+#include "Client.h"
+
+class HumanPlayerSender :public HumanPlayer {
 public:
     HumanPlayerSender(char symbol, Board *board, GameLogic *gameLogic, Client *client) :
-            Player(symbol, board, gameLogic) {
+            HumanPlayer(symbol, board, gameLogic) {
         this->client = client;
     };
 

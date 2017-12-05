@@ -63,6 +63,7 @@ void Client::sendMove(BoardCoordinates move) {
 
 BoardCoordinates Client::receiveMove() {
     char moveMessage[7];
+    cout << "Waiting for other player's move...";
     int readParam = read(clientSocket, &moveMessage, sizeof(moveMessage));
     if (readParam == -1) {
         throw "Error reading result from socket";

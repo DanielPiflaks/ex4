@@ -13,6 +13,7 @@ Exercise name: Ex3
 #include "StandartGameLogic.h"
 #include "MiniMaxSimulator.h"
 #include "AIPlayer.h"
+#include "HumanPlayerSender.h"
 
 GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, PlayerOptions player2Type,
                                char player2Symbol,
@@ -35,10 +36,8 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
         client = new Client(IP, PORT);
         int startFirstParam = client->connectToServer();
         if (startFirstParam == 1) {
-            if (player1Type == RemotePlayerOp) {
-                player1Type = player2Type;
-                player2Type = RemotePlayerOp;
-            }
+            player1Type = HumanPlayerSenderOp;
+            player2Type = RemotePlayerOp;
 
             cout << "Waiting for other player to join..." << endl;
             int getStartGame = client->getStartGameNotification();
@@ -47,10 +46,8 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
             }
         }
         if (startFirstParam == 2) {
-            if (player2Type == RemotePlayerOp) {
-                player2Type = player1Type;
-                player1Type = RemotePlayerOp;
-            }
+            player2Type = HumanPlayerSenderOp;
+            player1Type = RemotePlayerOp;
         }
 
     }
@@ -73,9 +70,14 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
             player1 = new RemotePlayer(player1Symbol, gameBoard, gameLogic, client);
             break;
         }
+        case HumanPlayerSenderOp: {
+            player1 = new HumanPlayerSender(player1Symbol, gameBoard, gameLogic, client);
+            break;
+        }
         default:
             break;
     }
+
     //Create player 2 by it's symbol and type.
     switch (player2Type) {
         case HumanPlayerOp: {
@@ -88,6 +90,10 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
         }
         case RemotePlayerOp: {
             player2 = new RemotePlayer(player2Symbol, gameBoard, gameLogic, client);
+            break;
+        }
+        case HumanPlayerSenderOp: {
+            player2 = new HumanPlayerSender(player1Symbol, gameBoard, gameLogic, client);
             break;
         }
         default:

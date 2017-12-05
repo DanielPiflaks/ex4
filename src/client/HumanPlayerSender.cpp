@@ -5,6 +5,6 @@
 #include "HumanPlayerSender.h"
 
 map <BoardCoordinates, vector<BoardCoordinates> > HumanPlayerSender::playOneTurn() {
-    HumanPlayer::playOneTurn();
-    client->sendMove();
+    map<BoardCoordinates, vector<BoardCoordinates> > mapOfMoves = HumanPlayer::playOneTurn();
+    client->sendMove(mapOfMoves.begin()->first);
 }

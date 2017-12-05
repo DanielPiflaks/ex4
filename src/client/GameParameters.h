@@ -22,7 +22,7 @@ public:
      * Enum of player options type.
      */
     enum PlayerOptions {
-        HumanPlayerOp, AIPlayerOp, RemotePlayerOp
+        HumanPlayerOp, HumanPlayerSenderOp, AIPlayerOp, RemotePlayerOp
     };
 
     /**

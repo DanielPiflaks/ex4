@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpthread")
 add_subdirectory(lib/googletest-master)
 include_directories(lib/googletest-master/googletest/include)
 
-set(SOURCE_FILES_CLIENT src/client/Board.cpp src/client/Board.h src/client/Player.h src/client/HumanPlayer.h src/client/HumanPlayer.cpp src/client/Player.cpp src/client/Game.h src/client/Game.cpp src/client/GameParameters.cpp src/client/GameParameters.h src/client/BoardCoordinates.cpp src/client/BoardCoordinates.h src/client/GameLogic.cpp src/client/GameLogic.h src/client/StandartGameLogic.cpp src/client/StandartGameLogic.h src/client/AIPlayer.h src/client/AIPlayer.cpp src/client/MiniMaxSimulator.cpp src/client/MiniMaxSimulator.h src/client/RemotePlayer.cpp src/client/RemotePlayer.h src/client/Client.cpp src/client/Client.h)
+set(SOURCE_FILES_CLIENT src/client/Board.cpp src/client/Board.h src/client/Player.h src/client/HumanPlayer.h src/client/HumanPlayer.cpp src/client/Player.cpp src/client/Game.h src/client/Game.cpp src/client/GameParameters.cpp src/client/GameParameters.h src/client/BoardCoordinates.cpp src/client/BoardCoordinates.h src/client/GameLogic.cpp src/client/GameLogic.h src/client/StandartGameLogic.cpp src/client/StandartGameLogic.h src/client/AIPlayer.h src/client/AIPlayer.cpp src/client/MiniMaxSimulator.cpp src/client/MiniMaxSimulator.h src/client/RemotePlayer.cpp src/client/RemotePlayer.h src/client/Client.cpp src/client/Client.h src/client/HumanPlayerSender.cpp src/client/HumanPlayerSender.h)
 set(TESTS_FILES tests/MiniMaxSimulatorTest.cpp tests/BoardTest.cpp tests/GameLogicTest.cpp)
 set(SOURCE_FILES_SERVER  src/server/Server.cpp src/server/Server.h)
 
