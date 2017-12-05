@@ -14,7 +14,9 @@ public:
 
     int connectToServer();
 
-    int sendMove(int row, int col);
+    void sendMove(BoardCoordinates move);
+
+    BoardCoordinates receiveMove();
 
     int getStartGameNotification();
 

@@ -7,6 +7,10 @@
 
 
 vector<BoardCoordinates> RemotePlayer::playOneTurn(){
+
+
+
+
     //Get map of all possible moves.
     map<BoardCoordinates, vector<BoardCoordinates> > possibleMoves = gameLogic->getPossibleGameMoves(playerMoves,
                                                                                                      symbol);

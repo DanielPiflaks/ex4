@@ -7,5 +7,6 @@
 int main() {
     Server server(5555);
     server.start();
+    server.notifyFirstPlayerStart();
     return 0;
 }

@@ -16,6 +16,8 @@ public:
 
     void notifyFirstPlayerStart();
 
+    void sendAndReciveMoves();
+
 private:
     int port;
     int serverSocket; // the socket's file descriptor
