@@ -40,6 +40,7 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
                 player2Type = RemotePlayerOp;
             }
 
+            cout << "Waiting for other player to join..." << endl;
             int getStartGame = client->getStartGameNotification();
             if (getStartGame != 1) {
                 throw "Not valid start game notification";

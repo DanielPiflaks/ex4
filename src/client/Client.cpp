@@ -35,28 +35,51 @@ int Client::connectToServer() {
 
     int numberOfPlayer;
     int readParam = read(clientSocket, &numberOfPlayer, sizeof(numberOfPlayer));
-    if (readParam == -1){
+    if (readParam == -1) {
         throw "Error reading result from socket";
     }
     return numberOfPlayer;
 }
 
-int Client::sendMove(int row, int col) {
+void Client::sendMove(BoardCoordinates move) {
+    //Create message of move in wanted format.
+    char moveMessage[7];
+
+    if ((move.getRow() == 0) && (move.getColumn())) {
+        moveMessage = "NoMove";
+    } else {
+        moveMessage[0] = move.getRow();
+        moveMessage[1] = ',';
+        moveMessage[2] = ' ';
+        moveMessage[3] = move.getColumn();
+    }
+
     //Write the move coordinate to the socket.
-    int check = write(clientSocket, &row, sizeof(row));
+    int check = write(clientSocket, &moveMessage, sizeof(moveMessage));
     if (check == -1) {
         throw "Error writing row coordinate";
     }
-    check = write(clientSocket, &col, sizeof(col));
-    if (check == -1) {
-        throw "Error writing column coordinate";
+}
+
+BoardCoordinates receiveMove() {
+    char moveMessage[7];
+    int readParam = read(clientSocket, &moveMessage, sizeof(moveMessage));
+    if (readParam == -1) {
+        throw "Error reading result from socket";
+    }
+
+    if (moveMessage == "NoMove") {
+        return BoardCoordinates(0, 0);
+    } else {
+        BoardCoordinates receivedMove((int) moveMessage[0], (int) moveMessage[3]);
+        return receivedMove;
     }
 }
 
-int Client::getStartGameNotification(){
+int Client::getStartGameNotification() {
     int startParamNotify;
     int readParam = read(clientSocket, &startParamNotify, sizeof(startParamNotify));
-    if (readParam == -1){
+    if (readParam == -1) {
         throw "Error reading result from socket";
     }
     return startParamNotify;

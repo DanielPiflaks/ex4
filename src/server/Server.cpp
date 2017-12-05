@@ -52,7 +52,7 @@ void Server::start() {
     cout << "First client connected" << endl;
 
     // Write the result back to the client
-    int n = write(clientSocket1, &firstPlayerIndex, sizeof(firstPlayerIndex));
+    long n = write(clientSocket1, &firstPlayerIndex, sizeof(firstPlayerIndex));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         return;
@@ -75,10 +75,39 @@ void Server::start() {
 
 void Server::notifyFirstPlayerStart() {
     const int trueParam = 1;
-    int n = write(clientSocket1, &trueParam, sizeof(trueParam));
+    long n = write(clientSocket1, &trueParam, sizeof(trueParam));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         return;
     }
 }
 
+void Server::sendAndReciveMoves() {
+    long n;
+    char move[4];
+    while (true) {
+        n = read(clientSocket1, &move, sizeof(move));
+        if (n == -1) {
+            cout << "Error reading move" << endl;
+            return;
+        }
+
+        long n = write(clientSocket2, &move, sizeof(move));
+        if (n == -1) {
+            cout << "Error writing to socket" << endl;
+            return;
+        }
+
+        n = read(clientSocket2, &move, sizeof(move));
+        if (n == -1) {
+            cout << "Error reading move" << endl;
+            return;
+        }
+
+        n = write(clientSocket1, &move, sizeof(move));
+        if (n == -1) {
+            cout << "Error writing to socket" << endl;
+            return;
+        }
+    }
+}
