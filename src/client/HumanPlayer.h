@@ -25,7 +25,7 @@ public:
      * Plays one turn and returns vector of board coordinates that has been flipped.
      * @return vector of board coordinates that has been flipped
      */
-    virtual vector<BoardCoordinates> playOneTurn();
+    virtual map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
 private:
     /**

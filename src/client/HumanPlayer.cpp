@@ -12,12 +12,13 @@ Exercise name: Ex3
 #include "HumanPlayer.h"
 
 
-vector<BoardCoordinates> HumanPlayer::playOneTurn() {
+map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayer::playOneTurn() {
     //Get map of all possible moves.
     map<BoardCoordinates, vector<BoardCoordinates> > possibleMoves = gameLogic->getPossibleGameMoves(playerMoves,
                                                                                                      symbol);
     vector<BoardCoordinates> allMoves;
     vector<BoardCoordinates> flippedSymbols;
+    map<BoardCoordinates, vector<BoardCoordinates> > playerMove;
 
     //For board coordinate, get its possible move and insert in to all moves vector.
     for (map<BoardCoordinates, vector<BoardCoordinates> >::iterator moves = possibleMoves.begin();
@@ -39,8 +40,8 @@ vector<BoardCoordinates> HumanPlayer::playOneTurn() {
         cin.get(dummy);
 
         cout << endl;
-        //Return empty vector.
-        return flippedSymbols;
+        //Return empty map.
+        return playerMove;
     }
 
     //Print all possible moves.
@@ -54,7 +55,7 @@ vector<BoardCoordinates> HumanPlayer::playOneTurn() {
                                             playerChoice, getSymbol());
     cout << endl;
     //Return them.
-    return flippedSymbols;
+    playerMove.insert(pair<BoardCoordinates, vector <BoardCoordinates> >(playerChoice, flippedSymbols));
 }
 
 BoardCoordinates HumanPlayer::getPlayerChoice(vector<BoardCoordinates> possibleMoves) {

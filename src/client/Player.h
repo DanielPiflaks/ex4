@@ -32,7 +32,7 @@ public:
      * Virtual function that plays ones turn for player.
      * @return flipped board coordinates vector.
      */
-    virtual vector<BoardCoordinates> playOneTurn() = 0;
+    virtual map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn() = 0;
 
     /**
      * Add player symbol to board.

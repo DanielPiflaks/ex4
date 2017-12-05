@@ -57,7 +57,7 @@ void Game::putSymbolsStartPosition() {
 void Game::RunSingleGame() {
     //Set game over indicator to be 0.
     int gameOverIndicator = 0;
-    vector<BoardCoordinates> symbolsToUpdate;
+    map<BoardCoordinates, vector<BoardCoordinates> > mapOfLastMove;
     //Put symbols to it start position.
     putSymbolsStartPosition();
 
@@ -70,7 +70,8 @@ void Game::RunSingleGame() {
         //Print who it's turn to play.
         cout << firstPlayer->getSymbol() << ": It's your move" << endl;
         //Play one turn.
-        symbolsToUpdate = firstPlayer->playOneTurn();
+        mapOfLastMove = firstPlayer->playOneTurn();
+        vector<BoardCoordinates> symbolsToUpdate = mapOfLastMove.begin()->second;
         //Check if any symbols updated.
         if (symbolsToUpdate.empty()) {
             //If not, that means that player didn't have any move.
@@ -86,7 +87,8 @@ void Game::RunSingleGame() {
         //Print who it's turn to play.
         cout << secondPlayer->getSymbol() << ": It's your move" << endl;
         //Play one turn.
-        symbolsToUpdate = secondPlayer->playOneTurn();
+        mapOfLastMove = secondPlayer->playOneTurn();
+        symbolsToUpdate = mapOfLastMove.begin()->second;
         //Check if any symbols updated.
         if (symbolsToUpdate.empty()) {
             //If not, that means that player didn't have any move.

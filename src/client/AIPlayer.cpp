@@ -7,7 +7,7 @@ Exercise name: Ex3
 #include "BoardCoordinates.h"
 #include "AIPlayer.h"
 
-vector<BoardCoordinates> AIPlayer::playOneTurn() {
+map<BoardCoordinates, vector<BoardCoordinates> > AIPlayer::playOneTurn() {
     bool firstTime = true;
     //Get map of all possible moves.
     map<BoardCoordinates, vector<BoardCoordinates> > possibleMoves = gameLogic->getPossibleGameMoves(playerMoves,
@@ -39,8 +39,10 @@ vector<BoardCoordinates> AIPlayer::playOneTurn() {
             }
         }
     }
+    BoardCoordinates playerChosenMove = wantedMove;
     //Initialize vector of flipped symbols.
     vector<BoardCoordinates> flippedSymbols;
+    map<BoardCoordinates, vector<BoardCoordinates> > playerMove;
     //Check if wanted move is on board(maybe we don't have wanted move at all).
     if (board->isOnBoard(wantedMove.getRow(), wantedMove.getColumn())) {
         //Get flipped symbols vector.
@@ -51,12 +53,13 @@ vector<BoardCoordinates> AIPlayer::playOneTurn() {
         cout << getSymbol() << " Played" << wantedMove << endl;
         cout << endl;
         //Return all flipped symbols.
-        return flippedSymbols;
+        playerMove.insert(pair<BoardCoordinates, vector<BoardCoordinates> >(playerChosenMove, flippedSymbols));
+        return playerMove;
     } else {
         cout << "No possible moves." << endl;
         cout << endl;
         //Return empty vector.
-        return flippedSymbols;
+        return playerMove;
     }
 }
 

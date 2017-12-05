@@ -6,12 +6,13 @@
 #include "RemotePlayer.h"
 
 
-vector<BoardCoordinates> RemotePlayer::playOneTurn(){
+map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
     //Get map of all possible moves.
     map<BoardCoordinates, vector<BoardCoordinates> > possibleMoves = gameLogic->getPossibleGameMoves(playerMoves,
                                                                                                      symbol);
     vector<BoardCoordinates> allMoves;
     vector<BoardCoordinates> flippedSymbols;
+    map<BoardCoordinates, vector<BoardCoordinates> > playerMove;
 
     //For board coordinate, get its possible move and insert in to all moves vector.
     for (map<BoardCoordinates, vector<BoardCoordinates> >::iterator moves = possibleMoves.begin();
@@ -34,7 +35,7 @@ vector<BoardCoordinates> RemotePlayer::playOneTurn(){
 
         cout << endl;
         //Return empty vector.
-        return flippedSymbols;
+        return playerMove;
     }
 
     //Print all possible moves.
@@ -48,7 +49,7 @@ vector<BoardCoordinates> RemotePlayer::playOneTurn(){
                                             playerChoice, getSymbol());
     cout << endl;
     //Return them.
-    return flippedSymbols;
+    playerMove.insert(pair<BoardCoordinates, vector<BoardCoordinates> >(playerChoice, flippedSymbols));
 }
 
 

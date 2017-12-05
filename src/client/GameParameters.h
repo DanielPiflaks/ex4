@@ -16,8 +16,8 @@ Exercise name: Ex3
 
 class GameParameters {
 public:
-    //const char* IP = "10.0.0.4";
-    const char* IP = "127.0.0.1";
+    const char* IP = "10.0.0.49";
+    //const char* IP = "127.0.0.1";
     /**
      * Enum of player options type.
      */

@@ -18,7 +18,7 @@ int main() {
     GameParameters::PlayerOptions player2Type;
     int input;
     while (waitingForInput) {
-        cout << "choose your opponent(press 1 or 2 then enter):" << endl;
+        cout << "choose your opponent:" << endl;
         cout << "1. a human local player" << endl << "2. an AI player" << endl;
         cout << "3. a remote player" << endl;
         cin >> input;
