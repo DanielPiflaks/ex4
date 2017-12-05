@@ -7,6 +7,7 @@
 
 using namespace std;
 #include <iostream>
+#include "BoardCoordinates.h"
 
 class Client {
 public:
