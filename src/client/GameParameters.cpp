@@ -33,23 +33,25 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
     Client *client;
     if ((player1Type == RemotePlayerOp) || (player2Type == RemotePlayerOp)) {
         client = new Client(IP, PORT);
-        int remotePlayerNumber = client->connectToServer();
-        if (remotePlayerNumber == 1) {
-            if (player1Type != RemotePlayerOp) {
+        int startFirstParam = client->connectToServer();
+        if (startFirstParam == 1) {
+            if (player1Type == RemotePlayerOp) {
+                player1Type = player2Type;
+                player2Type = RemotePlayerOp;
+            }
+
+            int getStartGame = client->getStartGameNotification();
+            if (getStartGame != 1) {
+                throw "Not valid start game notification";
+            }
+        }
+        if (startFirstParam == 2) {
+            if (player2Type == RemotePlayerOp) {
                 player2Type = player1Type;
                 player1Type = RemotePlayerOp;
             }
         }
-        if (remotePlayerNumber == 2) {
-            if (player2Type != RemotePlayerOp) {
-                player1Type = player2Type;
-                player2Type = RemotePlayerOp;
-            }
-            int getStartGame = client->getStartGameNotification();
-            if (getStartGame != 1){
-                throw "Not valid start game notification";
-            }
-        }
+
     }
 
     //Create 2 simulator in case that one of players is computer.
