@@ -16,7 +16,7 @@ public:
 
     int sendMove(int row, int col);
 
-
+    int getStartGameNotification();
 
 private:
     const char *serverIP;

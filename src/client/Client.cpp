@@ -53,4 +53,10 @@ int Client::sendMove(int row, int col) {
     }
 }
 
-
+int Client::getStartGameNotification(){
+    int StartParam;
+    int readParam = read(clientSocket, &StartParam, sizeof(StartParam));
+    if (readParam == -1){
+        throw "Error reading result from socket";
+    }
+}

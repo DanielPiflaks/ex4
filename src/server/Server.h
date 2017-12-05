@@ -14,10 +14,11 @@ public:
 
     void stop();
 
+    void notifyFirstPlayerStart();
+
 private:
     int port;
     int serverSocket; // the socket's file descriptor
-    void handleClient(int clientSocket);
 
     int clientSocket1;
     int clientSocket2;

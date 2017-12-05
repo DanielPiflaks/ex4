@@ -34,7 +34,7 @@ void Server::start() {
     }
 
     // Start listening to incoming connections
-    if(listen(serverSocket, MAX_CONNECTED_CLIENTS) < 0){
+    if (listen(serverSocket, MAX_CONNECTED_CLIENTS) < 0) {
         throw "Error listening";
     }
 
@@ -67,6 +67,15 @@ void Server::start() {
     cout << "Second client connected" << endl;
     // Write the result back to the client
     n = write(clientSocket2, &secondPlayerIndex, sizeof(secondPlayerIndex));
+    if (n == -1) {
+        cout << "Error writing to socket" << endl;
+        return;
+    }
+}
+
+void Server::notifyFirstPlayerStart() {
+    const int trueParam = 1;
+    int n = write(clientSocket1, &trueParam, sizeof(trueParam));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         return;
