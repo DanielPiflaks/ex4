@@ -2,8 +2,8 @@
 // Created by sapirblutman on 05/12/17.
 //
 
-#ifndef EX4_DANIELHARA_H
-#define EX4_DANIELHARA_H
+#ifndef EX4_HUMANPLAYERSENDER_H
+#define EX4_HUMANPLAYERSENDER_H
 
 
 class HumanPlayerSender : HumanPlayer {
