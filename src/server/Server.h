@@ -8,7 +8,7 @@ using namespace std;
 
 class Server {
 public:
-    Server();
+    Server(const char * fileName);
 
     Server(int port);
 
@@ -27,7 +27,7 @@ private:
     int clientSocket1;
     int clientSocket2;
 
-    void setPortFromFile();
+    void setPortFromFile(const char * fileName);
 };
 
 

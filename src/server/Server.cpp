@@ -13,8 +13,8 @@
 
 #define MAX_CONNECTED_CLIENTS 2
 
-Server::Server(){
-    setPortFromFile();
+Server::Server(const char * fileName){
+    setPortFromFile(fileName);
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
         throw "Error opening socket";
@@ -121,13 +121,11 @@ void Server::sendAndReciveMoves() {
     }
 }
 
-void Server::setPortFromFile() {
+void Server::setPortFromFile(const char * fileName) {
     //Set const sub string as expected.
     const string portSubString = "PORT:";
     //Set const comment char symbol.
     const char commentChar = '#';
-    //Set file name.
-    const char *fileName = "ServerConnectionSettings.txt";
     string singleLine, stringPort;
     ifstream inFile;
     //Open file.

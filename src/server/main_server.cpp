@@ -5,7 +5,8 @@
 #include "Server.h"
 
 int main() {
-    Server serverGame;
+    const char * fileName = "ServerConnectionSettings.txt";
+    Server serverGame(fileName);
     serverGame.start();
     serverGame.notifyFirstPlayerStart();
     serverGame.sendAndReciveMoves();
