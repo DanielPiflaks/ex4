@@ -37,13 +37,17 @@ int Client::connectToServer() {
     if (connect(clientSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
+    //Inform the client that connection succeeded.
     cout << "Connected to server" << endl;
 
     int numberOfPlayer;
+    //Read from socket a number that notify the client his player number(if 1st or 2nd).
     int readParam = read(clientSocket, &numberOfPlayer, sizeof(numberOfPlayer));
+    //If read from socket failed.
     if (readParam == -1) {
         throw "Error reading result from socket";
     }
+    //Return client's player number.
     return numberOfPlayer;
 }
 
@@ -51,9 +55,12 @@ void Client::sendMove(BoardCoordinates move) {
     //Create message of move in wanted format.
     char moveMessage[7];
 
+    //If there isn't any possible move.
     if ((move.getRow() == 0) && (move.getColumn())) {
         strcpy(moveMessage, "NoMove");
+        //If there is possible move.
     } else {
+        //Build a string with this pattern (x, y) from the client move.
         moveMessage[0] = (char) move.getRow();
         moveMessage[1] = ',';
         moveMessage[2] = ' ';
@@ -70,25 +77,32 @@ void Client::sendMove(BoardCoordinates move) {
 BoardCoordinates Client::receiveMove() {
     char moveMessage[7];
     cout << "Waiting for other player's moves";
+    //Read massage from socket.
     long readParam = read(clientSocket, &moveMessage, sizeof(moveMessage));
+    //If reading failed.
     if (readParam == -1) {
         throw "Error reading result from socket";
     }
-
     if (moveMessage == "NoMove") {
         return BoardCoordinates(0, 0);
+        //If there is any move to read.
     } else {
+        //Convert massage into coordinate.
         BoardCoordinates receivedMove((int) moveMessage[0], (int) moveMessage[3]);
+        //Return the move after coverting to board coordinate.
         return receivedMove;
     }
 }
 
 int Client::getStartGameNotification() {
     int startParamNotify;
+    //Read massage from socket.
     long readParam = read(clientSocket, &startParamNotify, sizeof(startParamNotify));
+    //If reading failed.
     if (readParam == -1) {
         throw "Error reading result from socket";
     }
+    //Return massage.
     return startParamNotify;
 }
 
@@ -135,29 +149,33 @@ void Client::setIpAndPortFromFile(const char *fileName) {
     }
 }
 
-void Client::sendEndGameMessage(){
-    const char * endGameMessage = "End";
+void Client::sendEndGameMessage() {
+    //Set wanted content of massage.
+    const char *endGameMessage = "End";
     //Create message of move in wanted format.
     char endGameBuffer[7];
 
     strcpy(endGameBuffer, endGameMessage);
 
-    //Write the move coordinate to the socket.
+    //Write the massage into the socket.
     long check = write(clientSocket, &endGameBuffer, sizeof(endGameBuffer));
+    //If writing failed.
     if (check == -1) {
         throw "Error writing row coordinate";
     }
 }
 
-void Client::sendNoPossibleMovesMessage(){
-    const char * noMoveMessage = "NoMove";
+void Client::sendNoPossibleMovesMessage() {
+    //Set wanted content of massage.
+    const char *noMoveMessage = "NoMove";
     //Create message of move in wanted format.
     char noMoveBuffer[7];
 
     strcpy(noMoveBuffer, noMoveMessage);
 
-    //Write the move coordinate to the socket.
+    //Write the massage into the socket.
     long check = write(clientSocket, &noMoveBuffer, sizeof(noMoveBuffer));
+    //If writing failed.
     if (check == -1) {
         throw "Error writing row coordinate";
     }

@@ -67,21 +67,21 @@ void Server::start() {
     }
     cout << "First client connected" << endl;
 
-    // Write the result back to the client
+    // Write the result back to the client.
     long n = write(clientSocket1, &firstPlayerIndex, sizeof(firstPlayerIndex));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         return;
     }
 
-    // Accept first client.
+    // Accept second client.
     clientSocket2 = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
 
     if (clientSocket2 == -1) {
         throw "Error on accept";
     }
     cout << "Second client connected" << endl;
-    // Write the result back to the client
+    // Write the result back to the client.
     n = write(clientSocket2, &secondPlayerIndex, sizeof(secondPlayerIndex));
     if (n == -1) {
         cout << "Error writing to socket" << endl;

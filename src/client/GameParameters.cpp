@@ -33,22 +33,31 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
     }
 
     Client *client;
+    //If one of players defined as remote player.
     if ((player1Type == RemotePlayerOp) || (player2Type == RemotePlayerOp)) {
         //Set file name.
         const char *fileName = "ClientConnectionSettings.txt";
+        //Create new client.
         client = new Client(fileName);
+        //Connect and receive from server a number(1 or 2) that represent his turn (1st or 2nd).
         int startFirstParam = client->connectToServer();
+        //If received 1 from server.
         if (startFirstParam == 1) {
+            //Set players type- first human, second remote.
             player1Type = HumanPlayerSenderOp;
             player2Type = RemotePlayerOp;
 
+            //Notify player that server waiting to 2nd player.
             cout << "Waiting for other player to join..." << endl;
+            //Wait for another massage from server, it will be receive only after both players connected.
             int getStartGame = client->getStartGameNotification();
             if (getStartGame != 1) {
                 throw "Not valid start game notification";
             }
         }
+        //If received 2 from server.
         if (startFirstParam == 2) {
+            //set opposite players type.
             player2Type = HumanPlayerSenderOp;
             player1Type = RemotePlayerOp;
         }
