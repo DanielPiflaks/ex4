@@ -12,7 +12,7 @@ using namespace std;
 
 class Client {
 public:
-    Client(const char * fileName);
+    explicit Client(const char * fileName);
 
     Client(const char *serverIP, int serverPort);
 

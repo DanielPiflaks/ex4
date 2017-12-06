@@ -14,30 +14,37 @@
 #define MAX_CONNECTED_CLIENTS 2
 
 Server::Server(const char *fileName) {
+    //Set port from parameter file.
     setPortFromFile(fileName);
+    //Create server socket.
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    //Check that server socket opened properly.
     if (serverSocket == -1) {
         throw "Error opening socket";
     }
 }
 
 Server::Server(int port) : port(port) {
+    //Create server socket.
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    //Check that server socket opened properly.
     if (serverSocket == -1) {
         throw "Error opening socket";
     }
 }
 
 void Server::start() {
+    //Create index for first and second players.
     const int firstPlayerIndex = 1;
     const int secondPlayerIndex = 2;
+    //Create server address.
     struct sockaddr_in serverAddress;
     memset(&serverAddress, 0, sizeof(serverAddress));
-
+    //Set parameters for server address.
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(port);
-
+    //Bind server socket to server address and check that binding worked.
     if (bind(serverSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error on binding";
     }
@@ -54,7 +61,7 @@ void Server::start() {
     cout << "Waiting for client connections..." << endl;
     // Accept first client.
     clientSocket1 = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
-
+    //Check that socket for first client opened correctly.
     if (clientSocket1 == -1) {
         throw "Error on accept";
     }
@@ -171,5 +178,5 @@ void Server::setPortFromFile(const char *fileName) {
 void Server::stop() {
     close(clientSocket1);
     close(clientSocket2);
-    int bla;
+    close(serverSocket);
 }
