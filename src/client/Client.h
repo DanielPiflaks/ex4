@@ -6,6 +6,7 @@
 #define EX4_CLIENT_H
 
 using namespace std;
+
 #include <iostream>
 #include "BoardCoordinates.h"
 
