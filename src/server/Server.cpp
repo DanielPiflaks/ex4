@@ -171,4 +171,5 @@ void Server::setPortFromFile(const char *fileName) {
 void Server::stop() {
     close(clientSocket1);
     close(clientSocket2);
+    int bla;
 }
