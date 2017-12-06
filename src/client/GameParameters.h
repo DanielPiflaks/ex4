@@ -12,7 +12,6 @@ using namespace std;
 #include "Player.h"
 #include "GameLogic.h"
 
-#define PORT 5555
 
 class GameParameters {
 public:
@@ -82,7 +81,6 @@ public:
      */
     StartFirstOptions getStartFirst() const;
 
-    void setIpAndPortFromFile();
 
 private:
     Board *gameBoard;

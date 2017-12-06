@@ -7,10 +7,16 @@
 #include <arpa/inet.h>
 #include <memory.h>
 #include <unistd.h>
+#include <fstream>
 #include "Client.h"
 
-Client::Client(const char *serverIP, int serverPort) :
+Client::Client(const  char *serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
+
+
+Client::Client(const char * fileName){
+    setIpAndPortFromFile(fileName);
+}
 
 int Client::connectToServer() {
     //Create socket point.
@@ -86,3 +92,45 @@ int Client::getStartGameNotification() {
     return startParamNotify;
 }
 
+
+void Client::setIpAndPortFromFile(const char * fileName) {
+    //Set const sub string as expected.
+    const string ipSubString = "IP:";
+    const string portSubString = "PORT:";
+    //Set const comment char symbol.
+    const char commentChar = '#';
+    string singleLine, stringPort;
+    ifstream inFile;
+    //Open file.
+    inFile.open(fileName);
+    //Check if file opened.
+    if (inFile.is_open()) {
+        //Check if file is empty.
+        if (!inFile.eof()) {
+            //Get next line.
+            getline(inFile, singleLine);
+        }
+        //Get all lines until we get to end of file.
+        while (!inFile.eof()) {
+            //Check if line is not comment line.
+            if (singleLine.find(commentChar) != 0) {
+                //Check if line contains ip sub string.
+                if (singleLine.find(ipSubString) == 0) {
+                    serverIP = (singleLine.substr(ipSubString.length(), singleLine.length())).c_str();
+                    //Check if line contains port sub string.
+                } else if (singleLine.find(portSubString) == 0) {
+                    stringPort = singleLine.substr(portSubString.length(), singleLine.length());
+                    //Convert string to int.
+                    sscanf(stringPort.c_str(), "%d", &serverPort);
+                }
+            }
+            //Get next line.
+            getline(inFile, singleLine);
+        }
+        //Close file when there is no more lines to read.
+        inFile.close();
+    } else {
+        //Throw exception when we can't open file.
+        throw "Can't open settings file!";
+    }
+}

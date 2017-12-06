@@ -11,6 +11,8 @@ using namespace std;
 
 class Client {
 public:
+    Client(const char * fileName);
+
     Client(const char *serverIP, int serverPort);
 
     int connectToServer();
@@ -20,6 +22,8 @@ public:
     BoardCoordinates receiveMove();
 
     int getStartGameNotification();
+
+    void setIpAndPortFromFile(const char * fileName);
 
 private:
     const char *serverIP;
