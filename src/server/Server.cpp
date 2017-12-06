@@ -93,7 +93,7 @@ void Server::notifyFirstPlayerStart() {
 
 void Server::sendAndReciveMoves() {
     long n;
-    char move[4];
+    char move[7];
     while (true) {
         n = read(clientSocket1, &move, sizeof(move));
         if (n == -1) {
