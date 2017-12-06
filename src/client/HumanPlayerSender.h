@@ -18,6 +18,7 @@ public:
 
     map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
+    virtual void endGameFunction();
 private:
     Client *client;
 };

@@ -18,7 +18,7 @@ public:
 
     void notifyFirstPlayerStart();
 
-    void sendAndReciveMoves();
+    void sendAndReceiveMoves();
 
 private:
     int port;

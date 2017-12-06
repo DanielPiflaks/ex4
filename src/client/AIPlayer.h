@@ -22,7 +22,7 @@ public:
     */
     AIPlayer(char symbol, Board *board, GameLogic *gameLogic, MiniMaxSimulator *wantedSimulator)
             : Player(symbol, board,
-                     gameLogic) {simulator = wantedSimulator;};
+                     gameLogic) { simulator = wantedSimulator; };
 
     /**
      * Destructor.
@@ -36,7 +36,12 @@ public:
     virtual map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
 
-        private:
+    /**
+     * End game behavior of player.
+     */
+    virtual void endGameFunction();
+
+private:
     MiniMaxSimulator *simulator;
 };
 

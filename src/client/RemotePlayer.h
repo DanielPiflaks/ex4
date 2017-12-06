@@ -29,9 +29,10 @@ public:
      */
     virtual map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
-    BoardCoordinates getPlayerChoice(vector<BoardCoordinates> possibleMoves);
-
-    void printPossibleMoves(vector<BoardCoordinates> possibleMoves);
+    /**
+     * End game behavior of player.
+     */
+    virtual void endGameFunction();
 
 private:
     Client *client;

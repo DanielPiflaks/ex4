@@ -9,6 +9,7 @@ int main() {
     Server serverGame(fileName);
     serverGame.start();
     serverGame.notifyFirstPlayerStart();
-    serverGame.sendAndReciveMoves();
+    serverGame.sendAndReceiveMoves();
+    serverGame.stop();
     return 0;
 }

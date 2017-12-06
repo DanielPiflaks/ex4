@@ -10,11 +10,11 @@
 #include <fstream>
 #include "Client.h"
 
-Client::Client(const  char *serverIP, int serverPort) :
+Client::Client(const char *serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
 
 
-Client::Client(const char * fileName){
+Client::Client(const char *fileName) {
     setIpAndPortFromFile(fileName);
 }
 
@@ -54,14 +54,14 @@ void Client::sendMove(BoardCoordinates move) {
     if ((move.getRow() == 0) && (move.getColumn())) {
         strcpy(moveMessage, "NoMove");
     } else {
-        moveMessage[0] = move.getRow();
+        moveMessage[0] = (char) move.getRow();
         moveMessage[1] = ',';
         moveMessage[2] = ' ';
-        moveMessage[3] = move.getColumn();
+        moveMessage[3] = (char) move.getColumn();
     }
 
     //Write the move coordinate to the socket.
-    int check = write(clientSocket, &moveMessage, sizeof(moveMessage));
+    long check = write(clientSocket, &moveMessage, sizeof(moveMessage));
     if (check == -1) {
         throw "Error writing row coordinate";
     }
@@ -69,8 +69,8 @@ void Client::sendMove(BoardCoordinates move) {
 
 BoardCoordinates Client::receiveMove() {
     char moveMessage[7];
-    cout << "Waiting for other playe;r's moves";
-    int readParam = read(clientSocket, &moveMessage, sizeof(moveMessage));
+    cout << "Waiting for other player's moves";
+    long readParam = read(clientSocket, &moveMessage, sizeof(moveMessage));
     if (readParam == -1) {
         throw "Error reading result from socket";
     }
@@ -85,7 +85,7 @@ BoardCoordinates Client::receiveMove() {
 
 int Client::getStartGameNotification() {
     int startParamNotify;
-    int readParam = read(clientSocket, &startParamNotify, sizeof(startParamNotify));
+    long readParam = read(clientSocket, &startParamNotify, sizeof(startParamNotify));
     if (readParam == -1) {
         throw "Error reading result from socket";
     }
@@ -93,7 +93,7 @@ int Client::getStartGameNotification() {
 }
 
 
-void Client::setIpAndPortFromFile(const char * fileName) {
+void Client::setIpAndPortFromFile(const char *fileName) {
     //Set const sub string as expected.
     const string ipSubString = "IP:";
     const string portSubString = "PORT:";
@@ -132,5 +132,33 @@ void Client::setIpAndPortFromFile(const char * fileName) {
     } else {
         //Throw exception when we can't open file.
         throw "Can't open settings file!";
+    }
+}
+
+void Client::sendEndGameMessage(){
+    const char * endGameMessage = "End";
+    //Create message of move in wanted format.
+    char endGameBuffer[7];
+
+    strcpy(endGameBuffer, endGameMessage);
+
+    //Write the move coordinate to the socket.
+    long check = write(clientSocket, &endGameBuffer, sizeof(endGameBuffer));
+    if (check == -1) {
+        throw "Error writing row coordinate";
+    }
+}
+
+void Client::sendNoPossibleMovesMessage(){
+    const char * noMoveMessage = "NoMove";
+    //Create message of move in wanted format.
+    char noMoveBuffer[7];
+
+    strcpy(noMoveBuffer, noMoveMessage);
+
+    //Write the move coordinate to the socket.
+    long check = write(clientSocket, &noMoveBuffer, sizeof(noMoveBuffer));
+    if (check == -1) {
+        throw "Error writing row coordinate";
     }
 }

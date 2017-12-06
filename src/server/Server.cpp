@@ -13,7 +13,7 @@
 
 #define MAX_CONNECTED_CLIENTS 2
 
-Server::Server(const char * fileName){
+Server::Server(const char *fileName) {
     setPortFromFile(fileName);
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
@@ -21,7 +21,7 @@ Server::Server(const char * fileName){
     }
 }
 
-Server::Server(int port) : port(port){
+Server::Server(int port) : port(port) {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
         throw "Error opening socket";
@@ -91,37 +91,46 @@ void Server::notifyFirstPlayerStart() {
     }
 }
 
-void Server::sendAndReciveMoves() {
+void Server::sendAndReceiveMoves() {
+    const char *endGameMessage = "End";
     long n;
-    char move[4];
+    char message[7];
     while (true) {
-        n = read(clientSocket1, &move, sizeof(move));
+        n = read(clientSocket1, &message, sizeof(message));
         if (n == -1) {
-            cout << "Error reading move" << endl;
-            return;
+            throw "Error reading move";
+        }
+        if (strcmp(message, endGameMessage)) {
+            break;
         }
 
-        long n = write(clientSocket2, &move, sizeof(move));
+        long n = write(clientSocket2, &message, sizeof(message));
         if (n == -1) {
-            cout << "Error writing to socket" << endl;
-            return;
+            throw "Error reading move";
+        }
+        if (strcmp(message, endGameMessage)) {
+            break;
         }
 
-        n = read(clientSocket2, &move, sizeof(move));
+        n = read(clientSocket2, &message, sizeof(message));
         if (n == -1) {
-            cout << "Error reading move" << endl;
-            return;
+            throw "Error reading move";
+        }
+        if (strcmp(message, endGameMessage)) {
+            break;
         }
 
-        n = write(clientSocket1, &move, sizeof(move));
+        n = write(clientSocket1, &message, sizeof(message));
         if (n == -1) {
-            cout << "Error writing to socket" << endl;
-            return;
+            throw "Error reading move";
+        }
+        if (strcmp(message, endGameMessage)) {
+            break;
         }
     }
 }
 
-void Server::setPortFromFile(const char * fileName) {
+void Server::setPortFromFile(const char *fileName) {
     //Set const sub string as expected.
     const string portSubString = "PORT:";
     //Set const comment char symbol.
@@ -157,4 +166,9 @@ void Server::setPortFromFile(const char * fileName) {
         //Throw exception when we can't open file.
         throw "Can't open settings file!";
     }
+}
+
+void Server::stop() {
+    close(clientSocket1);
+    close(clientSocket2);
 }

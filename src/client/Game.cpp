@@ -61,6 +61,9 @@ void Game::RunSingleGame() {
     //Put symbols to it start position.
     putSymbolsStartPosition();
 
+    //Set param to know who played last.
+    Player *endPlayer;
+
     //Game loop. ends when both players don't have any possible moves.
     while (gameOverIndicator < 2) {
         //Set game over indicator to be 0.
@@ -76,6 +79,7 @@ void Game::RunSingleGame() {
         if (symbolsToUpdate.empty()) {
             //If not, that means that player didn't have any move.
             gameOverIndicator++;
+            endPlayer = secondPlayer;
         } else {
             //Update first player of his new symbols.
             firstPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
@@ -93,6 +97,7 @@ void Game::RunSingleGame() {
         if (symbolsToUpdate.empty()) {
             //If not, that means that player didn't have any move.
             gameOverIndicator++;
+            endPlayer = firstPlayer;
         } else {
             //Update second player of his new symbols.
             secondPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
@@ -100,6 +105,7 @@ void Game::RunSingleGame() {
             firstPlayer->updatePlayerSymbolRemoved(symbolsToUpdate);
         }
     }
+    endPlayer->endGameFunction();
     //Print player 1 score.
     cout << "Player " << firstPlayer->getSymbol() << " score is:" << firstPlayer->getScore() << endl;
     //Print player 2 score.

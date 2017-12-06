@@ -35,6 +35,11 @@ public:
     virtual map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn() = 0;
 
     /**
+     * End game behavior of player.
+     */
+    virtual void endGameFunction() = 0;
+
+    /**
      * Add player symbol to board.
      * @param row row where to add.
      * @param column column where to add.

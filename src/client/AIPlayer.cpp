@@ -66,3 +66,7 @@ map<BoardCoordinates, vector<BoardCoordinates> > AIPlayer::playOneTurn() {
 AIPlayer::~AIPlayer() {
     delete simulator;
 }
+
+void AIPlayer::endGameFunction(){
+
+}

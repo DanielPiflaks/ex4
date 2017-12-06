@@ -19,6 +19,10 @@ public:
 
     void sendMove(BoardCoordinates move);
 
+    void sendEndGameMessage();
+
+    void sendNoPossibleMovesMessage();
+
     BoardCoordinates receiveMove();
 
     int getStartGameNotification();

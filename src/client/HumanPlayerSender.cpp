@@ -7,4 +7,9 @@
 map <BoardCoordinates, vector<BoardCoordinates> > HumanPlayerSender::playOneTurn() {
     map<BoardCoordinates, vector<BoardCoordinates> > mapOfMoves = HumanPlayer::playOneTurn();
     client->sendMove(mapOfMoves.begin()->first);
+    return mapOfMoves;
+}
+
+void HumanPlayerSender::endGameFunction(){
+    client->sendEndGameMessage();
 }

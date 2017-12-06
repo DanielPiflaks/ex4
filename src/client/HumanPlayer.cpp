@@ -103,3 +103,7 @@ void HumanPlayer::printPossibleMoves(vector<BoardCoordinates> possibleMoves) {
     }
     cout << endl;
 }
+
+void HumanPlayer::endGameFunction(){
+
+}

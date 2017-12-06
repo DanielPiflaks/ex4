@@ -27,6 +27,11 @@ public:
      */
     virtual map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
+    /**
+     * End game behavior of player.
+     */
+    virtual void endGameFunction();
+
 private:
     /**
      * Asks user for his choice between all possible moves and returns it.
