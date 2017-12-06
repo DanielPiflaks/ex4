@@ -8,11 +8,20 @@
 #include <cstring>
 #include <unistd.h>
 #include <iostream>
+#include <fstream>
 #include "Server.h"
 
 #define MAX_CONNECTED_CLIENTS 2
 
-Server::Server(int port) : port(port) {
+Server::Server(){
+    setPortFromFile();
+    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (serverSocket == -1) {
+        throw "Error opening socket";
+    }
+}
+
+Server::Server(int port) : port(port){
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
         throw "Error opening socket";
@@ -109,5 +118,45 @@ void Server::sendAndReciveMoves() {
             cout << "Error writing to socket" << endl;
             return;
         }
+    }
+}
+
+void Server::setPortFromFile() {
+    //Set const sub string as expected.
+    const string portSubString = "PORT:";
+    //Set const comment char symbol.
+    const char commentChar = '#';
+    //Set file name.
+    const char *fileName = "ServerConnectionSettings.txt";
+    string singleLine, stringPort;
+    ifstream inFile;
+    //Open file.
+    inFile.open(fileName);
+    //Check if file opened.
+    if (inFile.is_open()) {
+        //Check if file is empty.
+        if (!inFile.eof()) {
+            //Get next line.
+            getline(inFile, singleLine);
+        }
+        //Get all lines until we get to end of file.
+        while (!inFile.eof()) {
+            //Check if line is not comment line.
+            if (singleLine.find(commentChar) != 0) {
+                //Check if line contains ip sub string.
+                if (singleLine.find(portSubString) == 0) {
+                    stringPort = singleLine.substr(portSubString.length(), singleLine.length());
+                    //Convert string to int.
+                    sscanf(stringPort.c_str(), "%d", &port);
+                }
+            }
+            //Get next line.
+            getline(inFile, singleLine);
+        }
+        //Close file when there is no more lines to read.
+        inFile.close();
+    } else {
+        //Throw exception when we can't open file.
+        throw "Can't open settings file!";
     }
 }

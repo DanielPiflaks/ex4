@@ -8,6 +8,8 @@ using namespace std;
 
 class Server {
 public:
+    Server();
+
     Server(int port);
 
     void start();
@@ -24,6 +26,8 @@ private:
 
     int clientSocket1;
     int clientSocket2;
+
+    void setPortFromFile();
 };
 
 

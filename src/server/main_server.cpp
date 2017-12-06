@@ -5,8 +5,9 @@
 #include "Server.h"
 
 int main() {
-    Server server(5555);
-    server.start();
-    server.notifyFirstPlayerStart();
+    Server serverGame;
+    serverGame.start();
+    serverGame.notifyFirstPlayerStart();
+    serverGame.sendAndReciveMoves();
     return 0;
 }

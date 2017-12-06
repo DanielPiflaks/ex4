@@ -7,7 +7,7 @@ Exercise name: Ex3
 
 #ifndef EX2_GAMECREATOR_H
 #define EX2_GAMECREATOR_H
-
+using namespace std;
 #include "Board.h"
 #include "Player.h"
 #include "GameLogic.h"
@@ -16,8 +16,6 @@ Exercise name: Ex3
 
 class GameParameters {
 public:
-    const char* IP = "10.0.0.49";
-    //const char* IP = "127.0.0.1";
     /**
      * Enum of player options type.
      */
@@ -84,12 +82,16 @@ public:
      */
     StartFirstOptions getStartFirst() const;
 
+    void setIpAndPortFromFile();
+
 private:
     Board *gameBoard;
     StartFirstOptions startFirst;
     GameLogic *gameLogic;
     Player *player1;
     Player *player2;
+    int port;
+    const char *ip;
 };
 
 #endif //EX2_GAMECREATOR_H

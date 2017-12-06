@@ -5,6 +5,7 @@ Course Exercise Group: 05
 Exercise name: Ex3
 ******************************************/
 
+#include <fstream>
 #include "Board.h"
 #include "Player.h"
 #include "GameParameters.h"
@@ -33,7 +34,8 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
 
     Client *client;
     if ((player1Type == RemotePlayerOp) || (player2Type == RemotePlayerOp)) {
-        client = new Client(IP, PORT);
+        setIpAndPortFromFile();
+        client = new Client(ip, port);
         int startFirstParam = client->connectToServer();
         if (startFirstParam == 1) {
             player1Type = HumanPlayerSenderOp;
@@ -93,7 +95,7 @@ GameParameters::GameParameters(PlayerOptions player1Type, char player1Symbol, Pl
             break;
         }
         case HumanPlayerSenderOp: {
-            player2 = new HumanPlayerSender(player1Symbol, gameBoard, gameLogic, client);
+            player2 = new HumanPlayerSender(player2Symbol, gameBoard, gameLogic, client);
             break;
         }
         default:
@@ -144,4 +146,48 @@ GameParameters::~GameParameters() {
     delete gameLogic;
     delete player1;
     delete player2;
+}
+
+void GameParameters::setIpAndPortFromFile() {
+    //Set const sub string as expected.
+    const string ipSubString = "IP:";
+    const string portSubString = "PORT:";
+    //Set const comment char symbol.
+    const char commentChar = '#';
+    //Set file name.
+    const char *fileName = "ClientConnectionSettings.txt";
+    string singleLine, stringPort;
+    ifstream inFile;
+    //Open file.
+    inFile.open(fileName);
+    //Check if file opened.
+    if (inFile.is_open()) {
+        //Check if file is empty.
+        if (!inFile.eof()) {
+            //Get next line.
+            getline(inFile, singleLine);
+        }
+        //Get all lines until we get to end of file.
+        while (!inFile.eof()) {
+            //Check if line is not comment line.
+            if (singleLine.find(commentChar) != 0) {
+                //Check if line contains ip sub string.
+                if (singleLine.find(ipSubString) == 0) {
+                    ip = (singleLine.substr(ipSubString.length(), singleLine.length())).c_str();
+                    //Check if line contains port sub string.
+                } else if (singleLine.find(portSubString) == 0) {
+                    stringPort = singleLine.substr(portSubString.length(), singleLine.length());
+                    //Convert string to int.
+                    sscanf(stringPort.c_str(), "%d", &port);
+                }
+            }
+            //Get next line.
+            getline(inFile, singleLine);
+        }
+        //Close file when there is no more lines to read.
+        inFile.close();
+    } else {
+        //Throw exception when we can't open file.
+        throw "Can't open settings file!";
+    }
 }
