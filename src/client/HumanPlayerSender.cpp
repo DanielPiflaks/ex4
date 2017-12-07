@@ -4,6 +4,10 @@
 
 #include "HumanPlayerSender.h"
 
+HumanPlayerSender::~HumanPlayerSender(){
+    delete client;
+}
+
 map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayerSender::playOneTurn() {
     map<BoardCoordinates, vector<BoardCoordinates> > mapOfMoves = HumanPlayer::playOneTurn();
     //Send wanted move.

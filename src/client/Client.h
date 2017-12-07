@@ -25,6 +25,8 @@ public:
      */
     Client(const char *serverIP, int serverPort);
 
+    ~Client();
+
     /**
      * Connect to existing socket that compatible to IP and port.
      * After connecting- read the client's player number.

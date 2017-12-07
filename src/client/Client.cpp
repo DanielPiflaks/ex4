@@ -9,7 +9,6 @@
 #include <unistd.h>
 #include <fstream>
 #include "Client.h"
-#include <sstream>
 
 Client::Client(const char *serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
@@ -17,6 +16,10 @@ Client::Client(const char *serverIP, int serverPort) :
 
 Client::Client(const char *fileName) {
     setIpAndPortFromFile(fileName);
+}
+
+Client::~Client(){
+   disconnectServer();
 }
 
 int Client::connectToServer() {

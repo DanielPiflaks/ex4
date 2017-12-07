@@ -4,6 +4,10 @@
 
 #include "RemotePlayer.h"
 
+RemotePlayer::~RemotePlayer(){
+   delete client;
+}
+
 
 map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
     //Get map of all possible moves.

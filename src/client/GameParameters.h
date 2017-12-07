@@ -88,8 +88,6 @@ private:
     GameLogic *gameLogic;
     Player *player1;
     Player *player2;
-    int port;
-    const char *ip;
 };
 
 #endif //EX2_GAMECREATOR_H

@@ -22,6 +22,10 @@ public:
         this->client = client;
     };
 
+    /**
+     * Destructor.
+     */
+    ~RemotePlayer();
 
     /**
      * Plays one turn and returns vector of board coordinates that has been flipped.

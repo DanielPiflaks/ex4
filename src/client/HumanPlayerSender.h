@@ -16,6 +16,11 @@ public:
         this->client = client;
     };
 
+    /**
+     * Destructor.
+     */
+    ~HumanPlayerSender();
+
     map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
     virtual void endGameFunction();
