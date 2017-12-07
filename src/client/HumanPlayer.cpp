@@ -40,7 +40,9 @@ map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayer::playOneTurn() {
                 " Press enter to continue.";
 
         cin.get(dummy);
-
+        cin.clear();
+        cin.clear();
+        cin.ignore(10000000, '\n');
         cout << endl;
         //Return empty map.
         return playerMove;
