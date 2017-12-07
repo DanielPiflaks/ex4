@@ -10,8 +10,8 @@ Exercise name: Ex3
 #include "Client.h"
 
 int main() {
-    const int numberRows = 8;
-    const int numberColumns = 8;
+    const int numberRows = 4;
+    const int numberColumns = 4;
 
     //Create bool parameter for while loop to get player wanted player.
     bool waitingForInput = true;

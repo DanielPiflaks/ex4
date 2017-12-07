@@ -58,6 +58,7 @@ void Game::RunSingleGame() {
     //Set game over indicator to be 0.
     int gameOverIndicator = 0;
     map<BoardCoordinates, vector<BoardCoordinates> > mapOfLastMove;
+    vector<BoardCoordinates> symbolsToUpdate;
     //Put symbols to it start position.
     putSymbolsStartPosition();
 
@@ -76,19 +77,27 @@ void Game::RunSingleGame() {
         cout << firstPlayer->getSymbol() << ": It's your move" << endl;
         //Play one turn.
         mapOfLastMove = firstPlayer->playOneTurn();
-        //Extract the vector of cell to update from map.
-        vector<BoardCoordinates> symbolsToUpdate = mapOfLastMove.begin()->second;
-        //Check if there is any symbols to updated.
-        if (symbolsToUpdate.empty()) {
-            //If not, that means that player didn't have any move.
+        //Check if map of moves is not empty.
+        if (!mapOfLastMove.empty()) {
+            //Extract the vector of cell to update from map.
+            symbolsToUpdate = mapOfLastMove.begin()->second;
+
+            //Check if there is any symbols to updated.
+            if (symbolsToUpdate.empty()) {
+                //If not, that means that player didn't have any move.
+                gameOverIndicator++;
+                endPlayer = secondPlayer;
+            } else {
+                //Update first player of his new symbols.
+                firstPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
+                //Update second player of symbols that he lost.
+                secondPlayer->updatePlayerSymbolRemoved(symbolsToUpdate);
+            }
+        } else {
             gameOverIndicator++;
             endPlayer = secondPlayer;
-        } else {
-            //Update first player of his new symbols.
-            firstPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
-            //Update second player of symbols that he lost.
-            secondPlayer->updatePlayerSymbolRemoved(symbolsToUpdate);
         }
+
         cout << "Current board:" << endl;
         cout << endl;
         //Draws game board.
@@ -97,18 +106,24 @@ void Game::RunSingleGame() {
         cout << secondPlayer->getSymbol() << ": It's your move" << endl;
         //Play one turn.
         mapOfLastMove = secondPlayer->playOneTurn();
-        //Extract the vector of cell to update from map.
-        symbolsToUpdate = mapOfLastMove.begin()->second;
-        //Check if any symbols updated.
-        if (symbolsToUpdate.empty()) {
-            //If not, that means that player didn't have any move.
+        //Check if map of moves is not empty.
+        if (!mapOfLastMove.empty()) {
+            //Extract the vector of cell to update from map.
+            symbolsToUpdate = mapOfLastMove.begin()->second;
+            //Check if any symbols updated.
+            if (symbolsToUpdate.empty()) {
+                //If not, that means that player didn't have any move.
+                gameOverIndicator++;
+                endPlayer = firstPlayer;
+            } else {
+                //Update second player of his new symbols.
+                secondPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
+                //Update first player of symbols that he lost.
+                firstPlayer->updatePlayerSymbolRemoved(symbolsToUpdate);
+            }
+        } else {
             gameOverIndicator++;
             endPlayer = firstPlayer;
-        } else {
-            //Update second player of his new symbols.
-            secondPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
-            //Update first player of symbols that he lost.
-            firstPlayer->updatePlayerSymbolRemoved(symbolsToUpdate);
         }
     }
     //Notice server that game ended.
