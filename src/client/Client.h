@@ -33,6 +33,11 @@ public:
     int connectToServer();
 
     /**
+     * Closing socket from server.
+     */
+    void disconnectServer();
+
+    /**
      *If there isn't any possible move(=>given move= (0,0)) then write to socket appropriate massage,
      * else- write the move coordinate.
      * @param move the client latest move (will be (0, 0) if there isn't one).

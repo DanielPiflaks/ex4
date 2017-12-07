@@ -57,7 +57,7 @@ void Client::sendMove(BoardCoordinates move) {
     char moveMessage[7];
 
     //If there isn't any possible move.
-    if ((move.getRow() == 0) && (move.getColumn())) {
+    if ((move.getRow() == 0) && (move.getColumn() == 0)) {
         strcpy(moveMessage, "NoMove");
         //If there is possible move.
     } else {
@@ -180,4 +180,8 @@ void Client::sendNoPossibleMovesMessage() {
     if (check == -1) {
         throw "Error writing row coordinate";
     }
+}
+
+void Client::disconnectServer(){
+    close(clientSocket);
 }
