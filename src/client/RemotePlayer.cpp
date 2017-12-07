@@ -35,10 +35,7 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
 
     //Check if there are no possible moves and notify player about it.
     if (allMoves.empty()) {
-        cout << "No possible moves. Play passes back to the other player." << endl;
-
-        client->sendNoPossibleMovesMessage();
-
+        cout << "Opponent has no moves. Play returns to you." << endl;
         //Return empty vector.
         return playerMove;
     }
@@ -56,12 +53,10 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
     cout << endl;
     //Return them.
     playerMove.insert(pair<BoardCoordinates, vector<BoardCoordinates> >(playerChoice, flippedSymbols));
-
+    return playerMove;
 }
 
 void RemotePlayer::endGameFunction() {
-    //Receive that other player can't move.
-    client->receiveMove();
     client->sendEndGameMessage();
     client->disconnectServer();
     delete client;

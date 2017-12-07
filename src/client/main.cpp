@@ -10,8 +10,8 @@ Exercise name: Ex4
 
 int main() {
     //Set size of game board.
-    const int numberRows = 4;
-    const int numberColumns = 4;
+    const int numberRows = 8;
+    const int numberColumns = 8;
 
     //Create bool parameter for while loop to get player wanted player.
     bool waitingForInput = true;

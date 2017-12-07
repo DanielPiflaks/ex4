@@ -18,8 +18,6 @@ map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayerSender::playOneTurn(
 }
 
 void HumanPlayerSender::endGameFunction() {
-    //Receive that other player can't move.
-    client->receiveMove();
     client->sendEndGameMessage();
     client->disconnectServer();
     delete client;

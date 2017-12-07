@@ -65,10 +65,11 @@ void Game::RunSingleGame() {
     //Set param to know who played last.
     Player *endPlayer;
 
+    //Set game over indicator to be 0.
+    gameOverIndicator = 0;
     //Game loop. ends when both players don't have any possible moves.
     while (gameOverIndicator < 2) {
-        //Set game over indicator to be 0.
-        gameOverIndicator = 0;
+
         cout << "Current board:" << endl;
         cout << endl;
         //Draw game board.
@@ -87,6 +88,8 @@ void Game::RunSingleGame() {
                 gameOverIndicator++;
                 endPlayer = secondPlayer;
             } else {
+                //Set game over indicator to be 0.
+                gameOverIndicator = 0;
                 //Update first player of his new symbols.
                 firstPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
                 //Update second player of symbols that he lost.
@@ -95,6 +98,10 @@ void Game::RunSingleGame() {
         } else {
             gameOverIndicator++;
             endPlayer = secondPlayer;
+        }
+
+        if (gameOverIndicator == 2) {
+            break;
         }
 
         cout << "Current board:" << endl;
@@ -113,6 +120,8 @@ void Game::RunSingleGame() {
                 gameOverIndicator++;
                 endPlayer = firstPlayer;
             } else {
+                //Set game over indicator to be 0.
+                gameOverIndicator = 0;
                 //Update second player of his new symbols.
                 secondPlayer->updatePlayerSymbolAdd(symbolsToUpdate);
                 //Update first player of symbols that he lost.

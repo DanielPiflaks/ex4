@@ -35,14 +35,9 @@ map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayer::playOneTurn() {
     sort(allMoves.begin(), allMoves.end());
     //Check if there are no possible moves and notify player about it.
     if (allMoves.empty()) {
-        char dummy;
         cout << "No possible moves. Play passes back to the other player."
                 " Press enter to continue.";
-
-        cin.get(dummy);
-        cin.clear();
-        cin.clear();
-        cin.ignore(10000000, '\n');
+        cin.ignore();
         cout << endl;
         //Return empty map.
         return playerMove;
