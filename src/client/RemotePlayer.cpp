@@ -32,21 +32,22 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
 
     //Check if there are no possible moves and notify player about it.
     if (allMoves.empty()) {
-        cout << "No possible moves. Play passes back to the other player."
-                " Press enter to continue.";
+        cout << "No possible moves. Play passes back to the other player." << endl;
 
         client->sendNoPossibleMovesMessage();
 
-        cout << endl;
         //Return empty vector.
         return playerMove;
     }
 
     //Get player choice.
     BoardCoordinates playerChoice = client->receiveMove();
-
-    //Print data massage about opponent last move.
-    cout << getSymbol() << ": played" << playerChoice << endl;
+    if (board->isOnBoard(playerChoice.getRow(), playerChoice.getColumn())) {
+        //Print data massage about opponent last move.
+        cout << getSymbol() << ": played" << playerChoice << endl;
+    } else {
+        cout << "Player has no possible moves" << endl;
+    }
 
     //Get flipped symbols vector.
     flippedSymbols = gameLogic->flipSymbols(possibleMoves,
