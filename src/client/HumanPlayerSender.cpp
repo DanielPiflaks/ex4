@@ -5,7 +5,6 @@
 #include "HumanPlayerSender.h"
 
 HumanPlayerSender::~HumanPlayerSender(){
-    delete client;
 }
 
 map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayerSender::playOneTurn() {
@@ -20,4 +19,5 @@ void HumanPlayerSender::endGameFunction() {
     client->receiveMove();
     client->sendEndGameMessage();
     client->disconnectServer();
+    delete client;
 }

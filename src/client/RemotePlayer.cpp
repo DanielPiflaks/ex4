@@ -5,7 +5,6 @@
 #include "RemotePlayer.h"
 
 RemotePlayer::~RemotePlayer(){
-   delete client;
 }
 
 
@@ -57,4 +56,5 @@ void RemotePlayer::endGameFunction() {
     client->receiveMove();
     client->sendEndGameMessage();
     client->disconnectServer();
+    delete client;
 }
