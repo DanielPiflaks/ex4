@@ -39,22 +39,18 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
     //Get player choice.
     BoardCoordinates playerChoice = client->receiveMove();
 
-    //Check if we received valid move.
-    if (board->isOnBoard(playerChoice.getRow(), playerChoice.getColumn())) {
-        //Get flipped symbols vector.
-        flippedSymbols = gameLogic->flipSymbols(possibleMoves,
-                                                playerChoice, getSymbol());
-        cout << endl;
-        //Return them.
-        playerMove.insert(pair<BoardCoordinates, vector<BoardCoordinates> >(playerChoice, flippedSymbols));
-    } else {
-        cout << "No possible moves. Play passes to other player" << endl;
-        //Return empty vector.
-        return playerMove;
-    }
+    //Get flipped symbols vector.
+    flippedSymbols = gameLogic->flipSymbols(possibleMoves,
+                                            playerChoice, getSymbol());
+    cout << endl;
+    //Return them.
+    playerMove.insert(pair<BoardCoordinates, vector<BoardCoordinates> >(playerChoice, flippedSymbols));
+
 }
 
 void RemotePlayer::endGameFunction() {
+    //Receive that other player can't move.
+    client->receiveMove();
     client->sendEndGameMessage();
     //client->disconnectServer();
 }
