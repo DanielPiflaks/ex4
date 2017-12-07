@@ -5,12 +5,12 @@ Course Exercise Group: 05
 Exercise name: Ex3
 ******************************************/
 #include <gtest/gtest.h>
-#include "../src/client/Board.h"
-#include "../src/client/Game.h"
-#include "../src/client/MiniMaxSimulator.h"
-#include "../src/client/StandartGameLogic.h"
-#include "../src/client/HumanPlayer.h"
-#include "../src/client/AIPlayer.h"
+#include "../Board.h"
+#include "../Game.h"
+#include "../MiniMaxSimulator.h"
+#include "../StandartGameLogic.h"
+#include "../HumanPlayer.h"
+#include "../AIPlayer.h"
 
 //Check that board is not changed in the simulator.
 TEST(MiniMaxSimulatorTest, BoardIsntChange) {

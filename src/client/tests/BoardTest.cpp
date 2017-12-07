@@ -5,7 +5,7 @@ Course Exercise Group: 05
 Exercise name: Ex3
 ******************************************/
 #include <gtest/gtest.h>
-#include "../src/client/Board.h"
+#include "../Board.h"
 
 //Check that copy constructor of board works.
 TEST(BoardTest, CopyConstructorCheck) {
