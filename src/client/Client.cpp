@@ -1,6 +1,9 @@
-//
-// Created by sapirblutman on 02/12/17.
-//
+/******************************************
+Student name: Daniel Piflaks and Sapir Blutman
+Student ID: Daniel : 311322986 Sapir : 203312905
+Course Exercise Group: 05
+Exercise name: Ex4
+******************************************/
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -18,8 +21,8 @@ Client::Client(const char *fileName) {
     setIpAndPortFromFile(fileName);
 }
 
-Client::~Client(){
-   disconnectServer();
+Client::~Client() {
+    disconnectServer();
 }
 
 int Client::connectToServer() {
@@ -185,6 +188,6 @@ void Client::sendNoPossibleMovesMessage() {
     }
 }
 
-void Client::disconnectServer(){
+void Client::disconnectServer() {
     close(clientSocket);
 }

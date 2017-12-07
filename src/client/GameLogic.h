@@ -2,7 +2,7 @@
 Student name: Daniel Piflaks and Sapir Blutman
 Student ID: Daniel : 311322986 Sapir : 203312905
 Course Exercise Group: 05
-Exercise name: Ex3
+Exercise name: Ex4
 ******************************************/
 #ifndef EX2_GAMELOGIC_H
 #define EX2_GAMELOGIC_H
@@ -71,7 +71,7 @@ public:
     * @return number of possible flips.
     */
     virtual int numberOfPossibleFlips(map<BoardCoordinates, vector<BoardCoordinates> > allChoices,
-                                                 BoardCoordinates wantedChoice, char playerSymbol) = 0;
+                                      BoardCoordinates wantedChoice, char playerSymbol) = 0;
 
 private:
     Board *board;

@@ -1,7 +1,9 @@
-//
-// Created by danielpiflaks on 02/12/17.
-//
-
+/******************************************
+Student name: Daniel Piflaks and Sapir Blutman
+Student ID: Daniel : 311322986 Sapir : 203312905
+Course Exercise Group: 05
+Exercise name: Ex4
+******************************************/
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -91,6 +93,7 @@ void Server::start() {
 
 void Server::notifyFirstPlayerStart() {
     const int trueParam = 1;
+    //Write to socket 1.
     long n = write(clientSocket1, &trueParam, sizeof(trueParam));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
@@ -103,28 +106,38 @@ void Server::sendAndReceiveMoves() {
     long n;
     char message[7];
     while (true) {
+        //Read from 1st socket.
         n = read(clientSocket1, &message, sizeof(message));
+        //If reading failed.
         if (n == -1) {
             throw "Error reading move";
         }
         if (strcmp(message, endGameMessage) == 0) {
+            //If massage from socket is about game ending then stop the loop.
             break;
         }
 
+        //Write to 2nd socket.
         long n = write(clientSocket2, &message, sizeof(message));
+        //If writing failed.
         if (n == -1) {
             throw "Error reading move";
         }
 
+        //Read from 2nd socket.
         n = read(clientSocket2, &message, sizeof(message));
+        //If reading failed.
         if (n == -1) {
             throw "Error reading move";
         }
         if (strcmp(message, endGameMessage) == 0) {
+            //If massage from socket is about game ending then stop the loop.
             break;
         }
 
+        //Write to 1st socket.
         n = write(clientSocket1, &message, sizeof(message));
+        //If writing failed.
         if (n == -1) {
             throw "Error reading move";
         }

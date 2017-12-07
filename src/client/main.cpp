@@ -2,14 +2,14 @@
 Student name: Daniel Piflaks and Sapir Blutman
 Student ID: Daniel : 311322986 Sapir : 203312905
 Course Exercise Group: 05
-Exercise name: Ex3
+Exercise name: Ex4
 ******************************************/
 #include <limits>
 #include "GameParameters.h"
 #include "Game.h"
-#include "Client.h"
 
 int main() {
+    //Set size of game board.
     const int numberRows = 4;
     const int numberColumns = 4;
 
@@ -18,6 +18,7 @@ int main() {
     GameParameters::PlayerOptions player2Type;
     int input;
     while (waitingForInput) {
+        //Print menu for user.
         cout << "choose your opponent:" << endl;
         cout << "1. a human local player" << endl << "2. an AI player" << endl;
         cout << "3. a remote player" << endl;

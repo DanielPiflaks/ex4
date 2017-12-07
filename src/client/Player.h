@@ -70,6 +70,10 @@ public:
      */
     int getScore() const;
 
+    /**
+     * Getter.
+     * @return Return player vector of cells with his symbols (his moves on board).
+     */
     vector<BoardCoordinates> getPlayerMoves();
 
 protected:

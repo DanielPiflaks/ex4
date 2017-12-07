@@ -2,7 +2,7 @@
 Student name: Daniel Piflaks and Sapir Blutman
 Student ID: Daniel : 311322986 Sapir : 203312905
 Course Exercise Group: 05
-Exercise name: Ex3
+Exercise name: Ex4
 ******************************************/
 
 #include "Player.h"
@@ -53,6 +53,6 @@ int Player::getScore() const {
     return playerMoves.size();
 }
 
-vector<BoardCoordinates> Player::getPlayerMoves(){
+vector<BoardCoordinates> Player::getPlayerMoves() {
     return playerMoves;
 }

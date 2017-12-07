@@ -2,7 +2,7 @@
 Student name: Daniel Piflaks and Sapir Blutman
 Student ID: Daniel : 311322986 Sapir : 203312905
 Course Exercise Group: 05
-Exercise name: Ex3
+Exercise name: Ex4
 ******************************************/
 
 #ifndef BOARD_H
@@ -16,8 +16,11 @@ using namespace std;
 
 class Board {
 public:
-
-    //Constructor.
+    /**
+     * Constructor.
+     * @param numRows number of rows.
+     * @param numCols number of columns.
+     */
     Board(int numRows, int numCols);
 
     //Copy constructor.

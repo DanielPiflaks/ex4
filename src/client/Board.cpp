@@ -2,16 +2,10 @@
 Student name: Daniel Piflaks and Sapir Blutman
 Student ID: Daniel : 311322986 Sapir : 203312905
 Course Exercise Group: 05
-Exercise name: Ex3
+Exercise name: Ex4
 ******************************************/
 #include "Board.h"
 
-/************************************************************************
-function name: Board.
-The Input: int numRows, int numCols.
-The output: none.
-The Function operation: Constructor of board.
-*************************************************************************/
 Board::Board(int numRows, int numCols) : numRows(numRows), numCols(numCols) {
     boardMatrix = new char *[numRows];
     for (int i = 0; i < numRows; ++i) {

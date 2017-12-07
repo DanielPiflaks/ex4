@@ -2,7 +2,7 @@
 Student name: Daniel Piflaks and Sapir Blutman
 Student ID: Daniel : 311322986 Sapir : 203312905
 Course Exercise Group: 05
-Exercise name: Ex3
+Exercise name: Ex4
 ******************************************/
 
 #ifndef EX2_HUMANPLAYER_H
@@ -23,7 +23,7 @@ public:
 
     /**
      * Plays one turn and returns vector of board coordinates that has been flipped.
-     * @return vector of board coordinates that has been flipped
+     * @return vector of board coordinates that has been flipped.
      */
     virtual map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 

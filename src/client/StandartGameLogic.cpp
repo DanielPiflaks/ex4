@@ -2,8 +2,9 @@
 Student name: Daniel Piflaks and Sapir Blutman
 Student ID: Daniel : 311322986 Sapir : 203312905
 Course Exercise Group: 05
-Exercise name: Ex3
+Exercise name: Ex4
 ******************************************/
+
 #include "StandartGameLogic.h"
 
 
@@ -82,7 +83,7 @@ vector<BoardCoordinates> StandartGameLogic::flipSymbols(map<BoardCoordinates, ve
         if (find(availableMoves.begin(), availableMoves.end(), wantedChoice) != availableMoves.end()) {
             //Flip wanted row.
             vector<BoardCoordinates> singleRow = singleRowToFlip(fromCoordinate,
-                                                               wantedChoice, playerSymbol);
+                                                                 wantedChoice, playerSymbol);
             flipOnBoard(singleRow, playerSymbol);
             //insert flipped row into remove places vector.
             for (int i = 0; i < singleRow.size(); ++i) {
@@ -96,7 +97,7 @@ vector<BoardCoordinates> StandartGameLogic::flipSymbols(map<BoardCoordinates, ve
 }
 
 vector<BoardCoordinates> StandartGameLogic::singleRowToFlip(BoardCoordinates start,
-                                                          BoardCoordinates end, char playerSymbol) {
+                                                            BoardCoordinates end, char playerSymbol) {
     vector<BoardCoordinates> flipCoordinates;
     //Get difference of row and col to know wanted direction.
     int rowDiff = start.getRow() - end.getRow();
@@ -237,7 +238,7 @@ int StandartGameLogic::numberOfPossibleFlips(map<BoardCoordinates, vector<BoardC
         if (find(availableMoves.begin(), availableMoves.end(), wantedChoice) != availableMoves.end()) {
             //Flip wanted row.
             vector<BoardCoordinates> singleRow = singleRowToFlip(fromCoordinate,
-                                                               wantedChoice, playerSymbol);
+                                                                 wantedChoice, playerSymbol);
             flipNumbers = flipNumbers + singleRow.size();
             //insert flipped row into remove places vector.
             for (int i = 0; i < singleRow.size(); ++i) {

@@ -1,6 +1,9 @@
-//
-// Created by sapirblutman on 05/12/17.
-//
+/******************************************
+Student name: Daniel Piflaks and Sapir Blutman
+Student ID: Daniel : 311322986 Sapir : 203312905
+Course Exercise Group: 05
+Exercise name: Ex4
+******************************************/
 
 #ifndef EX4_HUMANPLAYERSENDER_H
 #define EX4_HUMANPLAYERSENDER_H
@@ -26,11 +29,16 @@ public:
     ~HumanPlayerSender();
 
     /**
-     * Implement of same function of
-     * @return
+     * This class is derived from human player class, so the implementation of this function is same,
+     * with addition of sending this player last move to server.
+     * @return vector of board coordinates that has been flipped.
      */
     map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
+    /**
+     * Receive from server that opponent can't play, send back to server
+     * that this player can't play, and disconnect from socket.
+     */
     virtual void endGameFunction();
 
 private:
