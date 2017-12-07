@@ -30,6 +30,9 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
         }
     }
 
+    //Get player choice.
+    BoardCoordinates playerChoice = client->receiveMove();
+
     //Check if there are no possible moves and notify player about it.
     if (allMoves.empty()) {
         cout << "No possible moves. Play passes back to the other player." << endl;
@@ -40,8 +43,6 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
         return playerMove;
     }
 
-    //Get player choice.
-    BoardCoordinates playerChoice = client->receiveMove();
     if (board->isOnBoard(playerChoice.getRow(), playerChoice.getColumn())) {
         //Print data massage about opponent last move.
         cout << getSymbol() << ": played" << playerChoice << endl;
