@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <fstream>
 #include "Client.h"
+#include <sstream>
 
 Client::Client(const char *serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
@@ -76,7 +77,7 @@ void Client::sendMove(BoardCoordinates move) {
 
 BoardCoordinates Client::receiveMove() {
     char moveMessage[7];
-    cout << "Waiting for other player's moves";
+    cout << "Waiting for other player's moves" << endl;
     //Read massage from socket.
     long readParam = read(clientSocket, &moveMessage, sizeof(moveMessage));
     //If reading failed.

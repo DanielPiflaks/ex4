@@ -68,6 +68,8 @@ void Game::RunSingleGame() {
     while (gameOverIndicator < 2) {
         //Set game over indicator to be 0.
         gameOverIndicator = 0;
+        cout << "Current board:" << endl;
+        cout << endl;
         //Draw game board.
         gameBoard->drawBoard();
         //Print who it's turn to play.
@@ -87,6 +89,8 @@ void Game::RunSingleGame() {
             //Update second player of symbols that he lost.
             secondPlayer->updatePlayerSymbolRemoved(symbolsToUpdate);
         }
+        cout << "Current board:" << endl;
+        cout << endl;
         //Draws game board.
         gameBoard->drawBoard();
         //Print who it's turn to play.

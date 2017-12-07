@@ -101,13 +101,13 @@ void Server::notifyFirstPlayerStart() {
 void Server::sendAndReceiveMoves() {
     const char *endGameMessage = "End";
     long n;
-    char message[7];
+    char *message;
     while (true) {
         n = read(clientSocket1, &message, sizeof(message));
         if (n == -1) {
             throw "Error reading move";
         }
-        if (strcmp(message, endGameMessage)) {
+        if (strcmp(message, endGameMessage) == 0) {
             break;
         }
 
@@ -115,24 +115,18 @@ void Server::sendAndReceiveMoves() {
         if (n == -1) {
             throw "Error reading move";
         }
-        if (strcmp(message, endGameMessage)) {
-            break;
-        }
 
         n = read(clientSocket2, &message, sizeof(message));
         if (n == -1) {
             throw "Error reading move";
         }
-        if (strcmp(message, endGameMessage)) {
+        if (strcmp(message, endGameMessage) == 0) {
             break;
         }
 
         n = write(clientSocket1, &message, sizeof(message));
         if (n == -1) {
             throw "Error reading move";
-        }
-        if (strcmp(message, endGameMessage)) {
-            break;
         }
     }
 }
