@@ -101,7 +101,7 @@ void Server::notifyFirstPlayerStart() {
 void Server::sendAndReceiveMoves() {
     const char *endGameMessage = "End";
     long n;
-    char *message;
+    char message[7];
     while (true) {
         n = read(clientSocket1, &message, sizeof(message));
         if (n == -1) {
