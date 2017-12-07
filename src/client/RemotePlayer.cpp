@@ -13,9 +13,19 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
     map<BoardCoordinates, vector<BoardCoordinates> > playerMove;
     vector<BoardCoordinates> flippedSymbols;
 
+    vector<BoardCoordinates> allMoves;
+    //For board coordinate, get its possible move and insert in to all moves vector.
+    for (map<BoardCoordinates, vector<BoardCoordinates> >::iterator moves = possibleMoves.begin();
+         moves != possibleMoves.end(); ++moves) {
+        for (int i = 0; i < moves->second.size(); i++) {
+            if (find(allMoves.begin(), allMoves.end(), moves->second[i]) == allMoves.end()) {
+                allMoves.push_back(moves->second[i]);
+            }
+        }
+    }
 
     //Check if there are no possible moves and notify player about it.
-    if (possibleMoves.begin()->second.empty()) {
+    if (allMoves.empty()) {
         cout << "No possible moves. Play passes back to the other player."
                 " Press enter to continue.";
 
