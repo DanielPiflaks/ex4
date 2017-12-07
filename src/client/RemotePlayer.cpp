@@ -52,5 +52,5 @@ void RemotePlayer::endGameFunction() {
     //Receive that other player can't move.
     client->receiveMove();
     client->sendEndGameMessage();
-    //client->disconnectServer();
+    client->disconnectServer();
 }
