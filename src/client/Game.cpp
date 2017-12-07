@@ -73,8 +73,7 @@ void Game::RunSingleGame() {
         cout << endl;
         //Draw game board.
         gameBoard->drawBoard();
-        //Print who it's turn to play.
-        cout << firstPlayer->getSymbol() << ": It's your move" << endl;
+
         //Play one turn.
         mapOfLastMove = firstPlayer->playOneTurn();
         //Check if map of moves is not empty.
@@ -102,8 +101,6 @@ void Game::RunSingleGame() {
         cout << endl;
         //Draws game board.
         gameBoard->drawBoard();
-        //Print who it's turn to play.
-        cout << secondPlayer->getSymbol() << ": It's your move" << endl;
         //Play one turn.
         mapOfLastMove = secondPlayer->playOneTurn();
         //Check if map of moves is not empty.

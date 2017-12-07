@@ -4,7 +4,7 @@
 
 #include "HumanPlayerSender.h"
 
-HumanPlayerSender::~HumanPlayerSender(){
+HumanPlayerSender::~HumanPlayerSender() {
 }
 
 map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayerSender::playOneTurn() {

@@ -9,7 +9,11 @@
 #include "HumanPlayer.h"
 #include "Client.h"
 
-class HumanPlayerSender :public HumanPlayer {
+/**
+ * Constructor, implement the human player class constructor and in addition-
+ * set the member of client.
+ */
+class HumanPlayerSender : public HumanPlayer {
 public:
     HumanPlayerSender(char symbol, Board *board, GameLogic *gameLogic, Client *client) :
             HumanPlayer(symbol, board, gameLogic) {
@@ -21,9 +25,14 @@ public:
      */
     ~HumanPlayerSender();
 
+    /**
+     * Implement of same function of
+     * @return
+     */
     map<BoardCoordinates, vector<BoardCoordinates> > playOneTurn();
 
     virtual void endGameFunction();
+
 private:
     Client *client;
 };

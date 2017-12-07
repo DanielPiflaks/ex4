@@ -4,11 +4,14 @@
 
 #include "RemotePlayer.h"
 
-RemotePlayer::~RemotePlayer(){
+RemotePlayer::~RemotePlayer() {
 }
 
 
 map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
+
+    //Print who it's turn to play.
+    cout << getSymbol() << ": It's your move" << endl;
     //Get map of all possible moves.
     map<BoardCoordinates, vector<BoardCoordinates> > possibleMoves = gameLogic->getPossibleGameMoves(playerMoves,
                                                                                                      symbol);
@@ -41,6 +44,8 @@ map<BoardCoordinates, vector<BoardCoordinates> > RemotePlayer::playOneTurn() {
 
     //Get player choice.
     BoardCoordinates playerChoice = client->receiveMove();
+
+    cout << getSymbol() << ": played" << playerChoice << endl;
 
     //Get flipped symbols vector.
     flippedSymbols = gameLogic->flipSymbols(possibleMoves,

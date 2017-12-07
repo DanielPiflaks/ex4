@@ -13,6 +13,8 @@ Exercise name: Ex3
 
 
 map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayer::playOneTurn() {
+    //Print who it's turn to play.
+    cout << getSymbol() << ": It's your move" << endl;
     //Get map of all possible moves.
     map<BoardCoordinates, vector<BoardCoordinates> > possibleMoves = gameLogic->getPossibleGameMoves(playerMoves,
                                                                                                      symbol);
@@ -55,7 +57,7 @@ map<BoardCoordinates, vector<BoardCoordinates> > HumanPlayer::playOneTurn() {
                                             playerChoice, getSymbol());
     cout << endl;
     //Return them.
-    playerMove.insert(pair<BoardCoordinates, vector <BoardCoordinates> >(playerChoice, flippedSymbols));
+    playerMove.insert(pair<BoardCoordinates, vector<BoardCoordinates> >(playerChoice, flippedSymbols));
 }
 
 BoardCoordinates HumanPlayer::getPlayerChoice(vector<BoardCoordinates> possibleMoves) {
@@ -104,6 +106,6 @@ void HumanPlayer::printPossibleMoves(vector<BoardCoordinates> possibleMoves) {
     cout << endl;
 }
 
-void HumanPlayer::endGameFunction(){
+void HumanPlayer::endGameFunction() {
 
 }
